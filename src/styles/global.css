@@ -70,12 +70,11 @@
   html,
   body {
     @apply bg-background text-foreground;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable both-edges;
   }
   * {
     @apply border-border;
     scroll-behavior: smooth;
-		transition: color 50ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: color 50ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
-
 }
