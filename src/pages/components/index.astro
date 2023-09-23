@@ -1,0 +1,18 @@
+---
+export function getStaticPaths() {
+  // Define the dynamic paths here
+  return [
+    { params: { section: 'components' } },
+    { params: { section: 'examples' } },
+  ];
+
+}
+
+const {section} = Astro.params
+---
+<div class="w-full h-screen flex justify-center items-center">
+    hola como estas? en  
+</div>
+
+
+

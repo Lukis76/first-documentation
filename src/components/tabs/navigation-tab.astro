@@ -1,0 +1,64 @@
+<section class='flex flex-col justify-start items-center pt-8 max-w-xl w-full bg-zinc-100 rounded-md shadow-md shadow-zinc-900/20'>
+  <div class='container relative w-full px-3 flex justify-center items-center flex-col border-b-[1px] border-zinc-400/30'>
+    <nav class='relative h-12 w-4/5 flex justify-center items-center'>
+      <input type='radio' name='slider' id='home' class='peer/home' checked hidden />
+      <input type='radio' name='slider' id='blog' class='peer/blog' hidden />
+      <input type='radio' name='slider' id='about' class='peer/about' hidden />
+      <input type='radio' name='slider' id='contact' class='peer/contact' hidden />
+
+      <label
+        for='home'
+        class='home relative text-zinc-700 block h-full w-full text-center leading-[50px] cursor-pointer text-lg font-semibold transition-all peer-checked/home:text-indigo-500'
+        >Home</label
+      >
+      <label
+        for='blog'
+        class='blog relative text-zinc-700 block h-full w-full text-center leading-[50px] cursor-pointer text-lg font-semibold transition-all peer-checked/blog:text-indigo-500'
+        >Blog</label
+      >
+      <label
+        for='about'
+        class='about relative text-zinc-700 block h-full w-full text-center leading-[50px] cursor-pointer text-lg font-semibold transition-all peer-checked/about:text-indigo-500'
+        >About</label
+      >
+      <label
+        for='contact'
+        class='contact relative text-zinc-700 block h-full w-full text-center leading-[50px] cursor-pointer text-lg font-semibold transition-all peer-checked/contact:text-indigo-500'
+        >Contact</label
+      >
+    </nav>
+  </div>
+  <section class='p-6'>
+    <p id='home' class='text-zinc-800 hidden line-clamp-5'>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente repellat at saepe facere. Doloribus voluptatibus, provident fugit
+      sapiente, nisi ipsum quo repellendus magni numquam temporibus nostrum accusantium sit amet quaerat!
+    </p>
+    <p id='blog' class='text-zinc-800 hidden line-clamp-5'>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo facere quis saepe quidem quia suscipit cum accusamus eaque quod iure
+      exercitationem quasi, earum culpa blanditiis eligendi officia mollitia, tempore dicta!
+    </p>
+    <p id='about' class='text-zinc-800 hidden line-clamp-5'>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, aspernatur totam voluptate at magnam voluptas ab perferendis
+      iusto iure qui blanditiis minima perspiciatis. Tempora nobis aliquid consequatur, sit velit similique?
+    </p>
+    <p id='contact' class='text-zinc-800 hidden line-clamp-5'>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, nemo eos provident, eligendi necessitatibus voluptas, aspernatur
+      veritatis omnis ad mollitia ipsam est ullam! Enim, placeat aperiam. Debitis amet aliquid itaque!
+    </p>
+  </section>
+</section>
+
+<style>
+  .container:has(#home:checked) ~ section #home {
+    display: block;
+  }
+  .container:has(#blog:checked) ~ section #blog {
+    display: block;
+  }
+  .container:has(#about:checked) ~ section #about {
+    display: block;
+  }
+  .container:has(#contact:checked) ~ section #contact {
+    display: block;
+  }
+</style>

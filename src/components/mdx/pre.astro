@@ -1,0 +1,21 @@
+---
+const props = Astro.props
+---
+
+<div class='rounded-md dark:bg-[#24292e] bg-slate-300/50 my-8'>
+  <nav class='flex flex-row justify-start space-x-2 border-b rounded-t-md p-2 border-zinc-700/50 bg-transparent'>
+    <span class='w-4 h-4 rounded-full bg-rose-600'></span>
+    <span class='w-4 h-4 rounded-full bg-yellow-600'></span>
+    <span class='w-4 h-4 rounded-full bg-green-600'></span>
+  </nav>
+  <pre
+    class:list={[
+      'rounded-b-md dark:bg-zinc-700/50 bg-slate-300/50 border-none font-normal text-md px-4 pb-2 pt-0',
+      props.class,
+    ]}
+    {...props}>
+    <slot />
+  </pre>
+</div>
+
+

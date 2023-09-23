@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content'
+
+const blog = await getCollection('blog')
+const components = await getCollection('components')
+
+const collections = [
+  { collection: 'blog', articles: blog },
+  { collection: 'components', articles: components },
+]
+
+const params = Astro.params
+---
+
+<aside
+  class='sticky top-20 col-span-1 hidden max-h-[calc(100vh-90px)] w-full flex-col justify-start overflow-y-auto bg-default transition-colors duration-300 md:block dark:bg-zinc-700/20 bg-zinc-600/10 p-2 rounded-sm scroll'
+>
+  <nav class='mb-auto'>
+    <ul>
+      {
+        collections.map((c) => {
+          return (
+            <li>
+              <h3 class='font-semibold text-indigo-500/80 tamalindo'>{c.collection}</h3>
+              {
+                <ul class='fles flex-col justify-start'>
+                  {c.articles?.map((article) => {
+                    // console.log('map heading ==> ', article)
+                    return (
+                      <a href={`/blog/${article.slug}`}>
+                        <li
+                          class:list={[
+                            'px-2 py-1 rounded-r-sm dark:border-indigo-500/80 border-indigo-700/80 leading-5 text-sm text-foreground/80',
+                            article.slug === params.slug ? 'dark:bg-zinc-700/50 bg-zinc-600/10 border-l-2' : '',
+                          ]}
+                        >
+                          {article.data.title}
+                        </li>
+                      </a>
+                    )
+                  })}
+                </ul>
+              }
+            </li>
+          )
+        })
+      }
+    </ul>
+  </nav>
+</aside>

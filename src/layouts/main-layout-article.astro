@@ -1,0 +1,33 @@
+---
+type Props = {
+  title: string
+  dateTime: string
+}
+
+const { title, dateTime } = Astro.props
+---
+
+<div class='col-span-1 flex flex-col justify-start w-full min-w-0 items-center pt-4 px-4'>
+  <article class='flex w-full max-w-screen-md flex-col pb-20'>
+    <h1 class='text-3xl font-bold text-foreground mb-4'>
+      {title}
+    </h1>
+    <div class='w-full flex flex-row'>
+      <div class='flex flex-row justify-start items-center space-x-2'>
+        <img
+          src='https://www.gravatar.com/avatar/bfcb1d6a22d7098499771d3bcec5a8c4?d=robohash&f=y&s=128
+        '
+          alt='author'
+          class='h-10 w-10 rounded-full ring-4 ring-indigo-500/80'
+        />
+        <div class='flex flex-col justify-center items-start'>
+          <p class='text-xs text-foreground/80'>lucas manoguerra</p>
+          <p class='text-xs text-foreground/80'>lucasmanoguerra@gmail.com</p>
+        </div>
+      </div>
+      <time class='text-xs ml-auto mt-auto' datetime={dateTime}>{dateTime}</time>
+    </div>
+    <hr class='bg-foreground/50 w-full h-[2px] rounded-full my-2' />
+    <slot />
+  </article>
+</div>

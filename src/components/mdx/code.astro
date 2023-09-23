@@ -1,0 +1,19 @@
+---
+const props = Astro.props
+---
+
+<code id='coding' class:list={['p-0 bg-transparent text-sm', props.class]} {...props}>
+  <slot />
+</code>
+
+<script>
+  const codeElement = document.querySelectorAll('#coding > span')
+  codeElement?.forEach((span) => {
+    if (span?.textContent?.charAt(0) === '+') {
+      span.classList.add('bg-green-700/50')
+    }
+    if (span?.textContent?.charAt(0) === '-') {
+      span.classList.add('bg-rose-700/50')
+    }
+  })
+</script>

@@ -1,0 +1,7 @@
+---
+const props = Astro.props
+---
+
+<a class:list={['font-medium underline underline-offset-4', props.class]} {...props}>
+  <slot />
+</a>

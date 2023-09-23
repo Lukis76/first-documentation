@@ -1,0 +1,62 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import LeftAside from '../../components/left-aside.astro'
+import MainLayout from '../../layouts/MainLayout.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
+}
+type Props = CollectionEntry<'blog'> & { title: string; description: string }
+
+const post = Astro.props
+const { Content, headings, remarkPluginFrontmatter } = await post.render()
+---
+
+<MainLayout title={post.title} description={post.description}>
+  <LeftAside />
+  <div class='col-span-1 flex flex-col justify-start w-full min-w-0 items-center pt-4 px-4'>
+    <article class='flex w-full max-w-screen-md flex-col pb-20'>
+      <h1 class='text-3xl font-bold text-foreground mb-4'>
+        {remarkPluginFrontmatter?.title}
+      </h1>
+      <div class='w-full flex flex-row'>
+        <div class='flex flex-row justify-start items-center space-x-2'>
+          <img
+            src='https://www.gravatar.com/avatar/bfcb1d6a22d7098499771d3bcec5a8c4?d=robohash&f=y&s=128
+					'
+            alt='author'
+            class='h-10 w-10 rounded-full ring-4 ring-indigo-500/80'
+          />
+          <div class='flex flex-col justify-center items-start'>
+            <p class='text-xs text-foreground/80'>lucas manoguerra</p>
+            <p class='text-xs text-foreground/80'>lucasmanoguerra@gmail.com</p>
+          </div>
+        </div>
+        <time class='text-xs ml-auto mt-auto' datetime={remarkPluginFrontmatter.pubDate}>{remarkPluginFrontmatter.pubDate}</time>
+      </div>
+      <hr class='bg-foreground/50 w-full h-[2px] rounded-full my-2' />
+      <Content />
+    </article>
+  </div>
+  <aside
+    class='sticky top-20 col-span-1 hidden h-auto max-h-[calc(100vh-80px)] w-full flex-col justify-start overflow-y-auto bg-default transition-colors duration-300 lg:block dark:bg-zinc-700/20 bg-zinc-600/10 p-2 rounded-sm'
+  >
+    <nav>
+      <ul class='fles flex-col justify-start text-foreground/80'>
+        {
+          headings?.map((heading) => {
+            return (
+              <a href={`#${heading.slug}`}>
+                <li class=''># {heading.text}</li>
+              </a>
+            )
+          })
+        }
+      </ul>
+    </nav>
+  </aside>
+</MainLayout>

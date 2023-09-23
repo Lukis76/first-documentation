@@ -1,9 +1,23 @@
 ---
-title: 'Markdown Style Guide'
+title: 'Tabs'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jul 01 2022'
+pubDate: 'Sep 23 2023'
 heroImage: '/blog-placeholder-1.jpg'
 ---
+
+import { components as c } from '../../components/mdx/components-mdx.astro'
+export const components = { ...c }
+import NavigationTab from '../../components/tabs/navigation-tab.astro'
+
+
+
+## Modal not javascript
+
+<div class='my-6 p-6 flex justify-center items-center rounded-[0.5rem] border border-neutral-700/50'>
+<NavigationTab />
+</div>
+
+
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
@@ -34,6 +48,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 #### Syntax
 
 ```markdown
+
 ![Alt text](./full/or/relative/path/of/image)
 ```
 
@@ -50,6 +65,7 @@ The blockquote element represents content that is quoted from another source, op
 #### Syntax
 
 ```markdown
+
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 ```
@@ -63,15 +79,16 @@ The blockquote element represents content that is quoted from another source, op
 
 #### Syntax
 
-```markdown
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
+```ts
+
+function code() {
+  console.log('code')
+}
 ```
 
 #### Output
 
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
+> Don't communicate by sharing memory, share memory by communicating.
 
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
 
@@ -80,6 +97,7 @@ The blockquote element represents content that is quoted from another source, op
 #### Syntax
 
 ```markdown
+
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
 | _italics_ | **bold** | `code` |
@@ -98,8 +116,9 @@ The blockquote element represents content that is quoted from another source, op
 we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntac, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
 
 ````markdown
+
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -115,7 +134,8 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 Output
 
 ```html
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -134,6 +154,7 @@ Output
 #### Syntax
 
 ```markdown
+
 1. First item
 2. Second item
 3. Third item
@@ -150,6 +171,7 @@ Output
 #### Syntax
 
 ```markdown
+
 - List item
 - Another item
 - And another item
@@ -166,6 +188,7 @@ Output
 #### Syntax
 
 ```markdown
+
 - Fruit
   - Apple
   - Orange
@@ -190,6 +213,7 @@ Output
 #### Syntax
 
 ```markdown
+
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
 H<sub>2</sub>O
@@ -203,7 +227,7 @@ Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and ot
 
 #### Output
 
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+<abbr title='Graphics Interchange Format'>GIF</abbr> is a bitmap image format.
 
 H<sub>2</sub>O
 
