@@ -17,13 +17,15 @@
         stroke-width='5'
         stroke-linecap='round'
         stroke-linejoin='round'
-        class='lucide lucide-check'><polyline points='20 6 9 17 4 12'></polyline></svg
+        class='lucide lucide-check'
+        ><polyline points='20 6 9 17 4 12'></polyline></svg
       >
     </i>
   </div>
   <div class='title'>Success!!!</div>
   <div class='description'>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore hic quas perspiciatis, unde fuga corrupti.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore hic quas
+    perspiciatis, unde fuga corrupti.
   </div>
   <div class='dismiss-btn'>
     <label for='popup-btn'>Dismiss</label>
@@ -46,20 +48,25 @@
   .content-open-modal:has(#popup-btn:checked) ~ .background-dismiss {
     z-index: 20;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvh;
+    /* top: 0; */
+    /* left: 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0px;
+    /* width: 100dvw; */
+    /* height: 100dvh; */
     backdrop-filter: blur(4px);
     background-color: rgba(51, 50, 56, 0.257);
   }
+
   .content {
     width: 100%;
     min-height: 100dvh;
     font-family: 'Raleway';
   }
   .center {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -92,11 +99,18 @@
     margin: 5px 0px;
     width: 50px;
     height: 50px;
+    display: inline-block;
     border: 2px solid #34f234;
     text-align: center;
-    display: inline-block;
     border-radius: 50%;
     line-height: 60px;
+  }
+  .popup .icon i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
   .popup .icon i.fa {
     font-size: 30px;

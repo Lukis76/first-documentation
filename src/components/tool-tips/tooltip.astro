@@ -1,0 +1,61 @@
+---
+
+---
+
+<div class='avatar' data-tooltip='fist tooltip for me'>
+  <slot />
+</div>
+
+<style>
+  .avatar {
+    /* width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('https://source.unsplash.com/nKC772R_qog');
+    background-size: cover;
+    background-position: center; */
+    position: relative;
+  }
+
+  .avatar::before,
+  .avatar::after {
+    --scale: 0;
+    --tooltip-color: #242424;
+    --arrow-size: 10px;
+    position: absolute;
+    font-size: 12px;
+    top: -0.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0))
+      scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+  }
+  .avatar::before {
+    --translate-y: calc(-100% - (var(--arrow-size) - 2px));
+    content: attr(data-tooltip);
+    color: whitesmoke;
+    background-color: var(--tooltip-color);
+    border-radius: 0.3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .avatar:hover::before,
+  .avatar:hover::after {
+    --scale: 1;
+  }
+
+  .avatar::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+    content: '';
+    /* width: 10px; */
+    /* height: 10px; */
+    /* background-color: transparent; */
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+  }
+</style>

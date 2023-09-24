@@ -72,7 +72,7 @@
     @apply bg-background text-foreground;
     scrollbar-gutter: stable; /* both-edges; */
   }
-  * {
+  *, *::before, *::after {
     @apply border-border;
     box-sizing: border-box;
     scroll-behavior: smooth;
