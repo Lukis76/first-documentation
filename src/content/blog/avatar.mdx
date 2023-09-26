@@ -1,28 +1,200 @@
 ---
-title: 'Tabs'
+title: 'Avatar'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Sep 23 2023'
+pubDate: 'Sep 24 2023'
 heroImage: '/blog-placeholder-1.jpg'
 ---
 
 import { components as c } from '../../components/mdx/components-mdx.astro'
 export const components = { ...c }
-import NavigationTab from '../../components/tabs/navigation-tab.astro'
 import { Avatar } from '../../components/avatar/avatar'
 import { Chip } from '../../components/chips/chip'
-import { Badge } from '../../components/badges/badge'
 
-## Modal not javascript
+The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
 
-<div class='my-6 p-6 flex justify-center items-center rounded-[0.5rem] border border-neutral-700/50'>
-  <NavigationTab />
-</div>
+<br />
+
+### Size
 
 <div class='mb-8 mt-4 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
-  <Badge>
-    <Avatar size='xs' src='https://i.pravatar.cc/150?u=a042581f4e29026024d' />
-  </Badge>
+  <Avatar size='xs' src='https://i.pravatar.cc/150?u=a042581f4e29026024d' />
+  <Avatar size='sm' src='https://i.pravatar.cc/150?u=a04258a2462d826712d' />
+  <Avatar size='md' src='https://i.pravatar.cc/150?u=a042581f4e29026704d' />
+  <Avatar size='lg' src='https://i.pravatar.cc/150?u=a04258114e29026302d' />
+  <Avatar size='xl' src='https://i.pravatar.cc/150?u=a04258114e29026708c' />
 </div>
+
+### Disabled
+
+<div class='mb-8 mt-2 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
+  <Avatar
+    size='xs'
+    isDisabled
+    src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+  />
+  <Avatar
+    size='sm'
+    isDisabled
+    src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
+  />
+  <Avatar
+    size='md'
+    isDisabled
+    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+  />
+  <Avatar
+    size='lg'
+    isDisabled
+    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+  />
+  <Avatar
+    size='xl'
+    isDisabled
+    src='https://i.pravatar.cc/150?u=a04258114e29026708c'
+  />
+</div>
+
+### Bordered
+
+<div class='mb-8 mt-2 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a04258114e29026708c'
+  />
+</div>
+
+### Radius
+
+<div class='mb-8 mt-2 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
+  <Avatar
+    size='sm'
+    isBordered
+    radius='xs'
+    src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    radius='sm'
+    src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    radius='md'
+    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    radius='lg'
+    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    radius='full'
+    src='https://i.pravatar.cc/150?u=a04258114e29026708c'
+  />
+</div>
+
+### Colors
+
+<div class='mb-8 mt-2 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258114e29026708c'
+  />
+</div>
+
+### icon
+
+<div class='mb-8 mt-2 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
+  <Avatar
+    size='sm'
+    isBordered
+    src='https://i.pravatar.cc/150?u=a042581f4e29026024d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258a2462d826712d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+  />
+  <Avatar
+    size='sm'
+    isBordered
+    icon={Chip}
+    color=''
+    src='https://i.pravatar.cc/150?u=a04258114e29026708c'
+  />
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
