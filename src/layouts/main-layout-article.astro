@@ -1,4 +1,5 @@
 ---
+import FormattedDate from '../components/FormattedDate.astro'
 type Props = {
   title: string
   dateTime: string
@@ -25,7 +26,7 @@ const { title, dateTime } = Astro.props
           <p class='text-xs text-foreground/80'>lucasmanoguerra@gmail.com</p>
         </div>
       </div>
-      <time class='text-xs ml-auto mt-auto' datetime={dateTime}>{dateTime}</time>
+      <FormattedDate date={new Date(dateTime)} />
     </div>
     <hr class='bg-foreground/50 w-full h-[2px] rounded-full my-2' />
     <slot />

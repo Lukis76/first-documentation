@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
+// import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeSlug from "rehype-slug";
 import remarkCodeTitles from "remark-code-titles";
@@ -26,16 +26,16 @@ export default defineConfig({
         },
       ],
       rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            class: "heading-link heading-link--hidden---effects",
-            "data-heading-link": true,
-          },
-          behavior: "wrap",
-        },
-      ],
+      // [
+      //   rehypeAutolinkHeadings,
+      //   {
+      //     properties: {
+      //       class: "heading-link heading-link--hidden---effects",
+      //       "data-heading-link": true,
+      //     },
+      //     behavior: "wrap",
+      //   },
+      // ],
     ],
     syntaxHighlight: 'shiki',
     shikiConfig: {
