@@ -1,13 +1,10 @@
-import React, { type FC, type ReactNode } from 'react'
+import { useEffect, useState, type FC, type ReactNode } from 'react'
 import { cn } from '../../lib/utils'
 
 type Radius = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type ClassNames =
-  | Record<
-      'base' | 'img' | 'fallback' | 'name' | 'icon' | 'bordered' | 'disabled',
-      (string | undefined) | (string | undefined)[] | any
-    >
+  | Record<'base' | 'img' | 'fallback' | 'name' | 'icon' | 'bordered' | 'disabled', (string | undefined) | (string | undefined)[] | any>
   | undefined
 
 interface AvatarProps {
@@ -52,19 +49,16 @@ export const Avatar: FC<AvatarProps> = ({
   showFallback = false,
   classNames,
 }): JSX.Element => {
-  const [imgFailed, setImgFailed] = React.useState<boolean>(false)
-  const [img, setImg] = React.useState<string | undefined>(src)
+  const [imgFailed, setImgFailed] = useState<boolean>(false)
+  const [img, setImg] = useState<string | undefined>(undefined)
 
   const avatarClassName: Settings = {
     base: [
-      'flex relative justify-center items-center box-border align-middle outline-none bg-zinc-600',
+      'flex relative justify-center items-center box-border align-middle outline-none bg-zinc-600 overflow-hidden',
       classNames?.base,
       color,
     ],
-    img: [
-      'object-cover flex bg-zinc-600 border-2 border-zinc-950',
-      classNames?.img,
-    ],
+    img: ['object-cover flex bg-zinc-600 border-2 border-zinc-950', classNames?.img],
     fallback: [
       ' absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal text-center text-inherit  bg-transparent',
       classNames?.fallback,
@@ -95,11 +89,15 @@ export const Avatar: FC<AvatarProps> = ({
   }
 
   const handleImageError = (event: any) => {
-    // event.target.src = 'https://i.pravatar.cc/150?u=a04258114e29026708c' // Cambia a la imagen de respaldo
-    // setImgFailed(true)
     setImg(undefined)
     event.target.onerror = null // Elimina la función de error
   }
+
+  useEffect(() => {
+    if (src) {
+      setImg(src)
+    }
+  }, [src])
 
   return (
     <div
@@ -114,6 +112,7 @@ export const Avatar: FC<AvatarProps> = ({
       )}
     >
       {!!img ? (
+        // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/role-supports-aria-props
         <img
           src={img}
           alt={alt}
@@ -123,16 +122,11 @@ export const Avatar: FC<AvatarProps> = ({
         />
       ) : (
         showFallback && (
-          <span
-            aria-label={name}
-            role='img'
-            className={cn(avatarClassName.fallback)}
-          >
+          <span aria-label={name} role='img' className={cn(avatarClassName.fallback)}>
             {!icon &&
               typeof name === 'string' &&
               (name.split(' ')?.length > 1
-                ? name?.split(' ')[0]?.charAt(0) +
-                  name?.split(' ')[1]?.charAt(0)
+                ? name?.split(' ')[0]?.charAt(0) + name?.split(' ')[1]?.charAt(0)
                 : name?.charAt(0)
               )?.toLocaleUpperCase()}
             {icon}
