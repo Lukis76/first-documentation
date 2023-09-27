@@ -4,11 +4,14 @@ import { cn } from '../../lib/utils'
 type Radius = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 type ClassNames =
-  | Record<'base' | 'img' | 'fallback' | 'name' | 'icon' | 'bordered' | 'disabled', (string | undefined) | (string | undefined)[] | any>
+  | Record<
+      'base' | 'img' | 'fallback' | 'name' | 'icon' | 'bordered' | 'disabled',
+      (string | undefined) | (string | undefined)[] | any
+    >
   | undefined
 
 interface AvatarProps {
-  src: string
+  src?: string | undefined
   alt?: string
   color?: string
   radius?: Radius
@@ -24,9 +27,9 @@ interface AvatarProps {
   classNames?: ClassNames
 }
 
-interface Options {
-  src?: string
-  alt: string
+interface Settings {
+  base: string[] | string
+  fallback: string[] | string
   img: Array<string> | string
   color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
   radius: Record<Radius, string | string[]>
@@ -36,12 +39,11 @@ interface Options {
 }
 
 export const Avatar: FC<AvatarProps> = ({
-  src,
+  src = undefined,
   alt,
   color,
   radius = 'md',
   size = 'md',
-  defaultSrc,
   name,
   icon,
   isBordered = false,
@@ -51,14 +53,22 @@ export const Avatar: FC<AvatarProps> = ({
   classNames,
 }): JSX.Element => {
   const [imgFailed, setImgFailed] = React.useState<boolean>(false)
+  const [img, setImg] = React.useState<string | undefined>(src)
 
-  const avatarClassName: ClassNames & Options = {
-    base: ['flex relative justify-center items-center box-border align-middle outline-none', classNames?.base ?? '', color],
-    img: ['object-cover flex bg-zinc-600 border-2 border-zinc-950', classNames?.img ?? ''],
-    fallback: [' absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal text-center text-inherit  bg-transparent'],
-    name: name ?? '',
-    icon: '',
-    alt: alt ?? '',
+  const avatarClassName: Settings = {
+    base: [
+      'flex relative justify-center items-center box-border align-middle outline-none bg-zinc-600',
+      classNames?.base,
+      color,
+    ],
+    img: [
+      'object-cover flex bg-zinc-600 border-2 border-zinc-950',
+      classNames?.img,
+    ],
+    fallback: [
+      ' absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal text-center text-inherit  bg-transparent',
+      classNames?.fallback,
+    ],
     radius: {
       none: 'rounded-none',
       xs: 'rounded-sm',
@@ -84,20 +94,16 @@ export const Avatar: FC<AvatarProps> = ({
     disabled: ['opacity-30', classNames?.disabled],
   }
 
-  // let isImg = true;
-
   const handleImageError = (event: any) => {
-    // Esta función se ejecutará cuando la imagen no se cargue correctamente
-
-    event.target.src = 'https://i.pravatar.cc/150?u=a04258114e29026708c' // Cambia a la imagen de respaldo
-    setImgFailed(true)
+    // event.target.src = 'https://i.pravatar.cc/150?u=a04258114e29026708c' // Cambia a la imagen de respaldo
+    // setImgFailed(true)
+    setImg(undefined)
     event.target.onerror = null // Elimina la función de error
   }
 
-  const Icon = icon
-
   return (
     <div
+      role='img'
       className={cn(
         avatarClassName.base,
         avatarClassName.color,
@@ -107,28 +113,35 @@ export const Avatar: FC<AvatarProps> = ({
         avatarClassName.size[size]
       )}
     >
-      {!imgFailed && (
+      {!!img ? (
         <img
-          src={src}
+          src={img}
           alt={alt}
           onError={handleImageError}
           aria-disabled={isDisabled}
           className={cn(avatarClassName.radius[radius], avatarClassName.img)}
         />
+      ) : (
+        showFallback && (
+          <span
+            aria-label={name}
+            role='img'
+            className={cn(avatarClassName.fallback)}
+          >
+            {!icon &&
+              typeof name === 'string' &&
+              (name.split(' ')?.length > 1
+                ? name?.split(' ')[0]?.charAt(0) +
+                  name?.split(' ')[1]?.charAt(0)
+                : name?.charAt(0)
+              )?.toLocaleUpperCase()}
+            {icon}
+          </span>
+        )
       )}
-
-      {showFallback && imgFailed && (
-        <span aria-label={name} role='img' className={cn(avatarClassName.fallback)}>
-          {!icon &&
-            typeof name === 'string' &&
-            (name.split(' ')?.length > 1
-              ? name?.split(' ')[0]?.charAt(0) + name?.split(' ')[1]?.charAt(0)
-              : name?.charAt(0)
-            )?.toLocaleUpperCase()}
-          {icon}
-        </span>
-      )}
-      <span className='absolute -top-[3%] -right-[3%] z-30 w-3 h-3 bg-rose-600 rounded-full'>{icon !== undefined && icon}</span>
+      {/* <span className='absolute -top-[3%] -right-[3%] z-30 w-3 h-3 bg-rose-600 rounded-full'>
+        {icon !== undefined && icon}
+      </span> */}
     </div>
   )
 }
