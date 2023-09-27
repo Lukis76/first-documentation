@@ -1,71 +1,134 @@
-import { type FC, type ReactNode } from 'react'
+import React, { type FC, type ReactNode } from 'react'
 import { cn } from '../../lib/utils'
+
+type Radius = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+type ClassNames =
+  | Record<'base' | 'img' | 'fallback' | 'name' | 'icon' | 'bordered' | 'disabled', (string | undefined) | (string | undefined)[] | any>
+  | undefined
 
 interface AvatarProps {
   src: string
   alt?: string
   color?: string
-  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  radius?: Radius
+  size?: Size
+  defaultSrc?: string
   name?: string
-  cursor?:
-    | 'auto'
-    | 'default'
-    | 'pointer'
-    | 'wait'
-    | 'text'
-    | 'move'
-    | 'help'
-    | 'not-allwed'
-    | 'none'
-    | 'context-menu'
-    | 'progress'
-    | 'cell'
-    | 'crosshair'
   icon?: ReactNode
+  fallback?: ReactNode
   isBordered?: boolean
   isDisabled?: boolean
   isFucusable?: boolean
   showFallback?: boolean
-  classNames?: Record<'base' | 'img' | 'fallback' | 'name' | 'icon', string>
+  classNames?: ClassNames
+}
+
+interface Options {
+  src?: string
+  alt: string
+  img: Array<string> | string
+  color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
+  radius: Record<Radius, string | string[]>
+  size: Record<Size, string | string[]>
+  bordered: string[] | string
+  disabled: string[] | string
 }
 
 export const Avatar: FC<AvatarProps> = ({
   src,
   alt,
   color,
-  radius = 'full',
-  size = 'xs',
-  name = 'LR',
-  icon: Icon,
-  isBordered,
-  isDisabled,
-  cursor = 'default',
-  isFucusable,
-  showFallback,
+  radius = 'md',
+  size = 'md',
+  defaultSrc,
+  name,
+  icon,
+  isBordered = false,
+  isDisabled = false,
+  isFucusable = false,
+  showFallback = false,
   classNames,
-}) => {
-  const rounded = 'rounded-'.concat(radius)
+}): JSX.Element => {
+  const [imgFailed, setImgFailed] = React.useState<boolean>(false)
+
+  const avatarClassName: ClassNames & Options = {
+    base: ['flex relative justify-center items-center box-border align-middle outline-none', classNames?.base ?? '', color],
+    img: ['object-cover flex bg-zinc-600 border-2 border-zinc-950', classNames?.img ?? ''],
+    fallback: [' absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal text-center text-inherit  bg-transparent'],
+    name: name ?? '',
+    icon: '',
+    alt: alt ?? '',
+    radius: {
+      none: 'rounded-none',
+      xs: 'rounded-sm',
+      sm: 'rounded',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      ['2xl']: 'rounded-2xl',
+      ['3xl']: 'rounded-2xl',
+      full: 'rounded-full',
+    },
+    size: {
+      xs: 'h-6 w-6',
+      sm: 'h-8 w-8',
+      md: 'h-10 w-10',
+      lg: 'h-12 w-12',
+      xl: 'h-14 w-14',
+      ['2xl']: 'h-16 w-16',
+      ['3xl']: 'h-20 w-20',
+      ['4xl']: 'h-24 w-24',
+    },
+    bordered: ['border-2 border-indigo-500 ', classNames?.bordered],
+    disabled: ['opacity-30', classNames?.disabled],
+  }
+
+  // let isImg = true;
+
+  const handleImageError = (event: any) => {
+    // Esta función se ejecutará cuando la imagen no se cargue correctamente
+
+    event.target.src = 'https://i.pravatar.cc/150?u=a04258114e29026708c' // Cambia a la imagen de respaldo
+    setImgFailed(true)
+    event.target.onerror = null // Elimina la función de error
+  }
+
+  const Icon = icon
+
   return (
     <div
       className={cn(
-        'flex relative justify-center items-center box-border align-middle outline-none',
-        cursor !== 'default' && `cursor-${cursor}`
+        avatarClassName.base,
+        avatarClassName.color,
+        isBordered && avatarClassName.bordered,
+        isDisabled && avatarClassName.disabled,
+        avatarClassName.radius[radius],
+        avatarClassName.size[size]
       )}
     >
-      <img
-        src={src}
-        alt=''
-        aria-disabled='true'
-        className={ cn(
-          ["object-cover flex",
-          isBordered && 'ring-2 ring-indigo-500 border-2 border-zinc-950',
-          isDisabled && 'opacity-30 ',
-          rounded,
-          'size-'.concat(size),
-          classNames?.img]
-        )}
-      />
+      {!imgFailed && (
+        <img
+          src={src}
+          alt={alt}
+          onError={handleImageError}
+          aria-disabled={isDisabled}
+          className={cn(avatarClassName.radius[radius], avatarClassName.img)}
+        />
+      )}
+
+      {showFallback && imgFailed && (
+        <span aria-label={name} role='img' className={cn(avatarClassName.fallback)}>
+          {!icon &&
+            typeof name === 'string' &&
+            (name.split(' ')?.length > 1
+              ? name?.split(' ')[0]?.charAt(0) + name?.split(' ')[1]?.charAt(0)
+              : name?.charAt(0)
+            )?.toLocaleUpperCase()}
+          {icon}
+        </span>
+      )}
+      <span className='absolute -top-[3%] -right-[3%] z-30 w-3 h-3 bg-rose-600 rounded-full'>{icon !== undefined && icon}</span>
     </div>
   )
 }

@@ -199,11 +199,11 @@
     white-space: nowrap;
   }
 
-  img {
+  /* img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-  }
+  } */
   pre::-webkit-scrollbar,
   .scroll::-webkit-scrollbar,
   html::-webkit-scrollbar,
