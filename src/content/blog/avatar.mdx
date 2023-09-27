@@ -9,6 +9,7 @@ import { components as c } from '../../components/mdx/components-mdx.astro'
 export const components = { ...c }
 import { Avatar } from '../../components/avatar/avatar'
 import { Chip } from '../../components/chips/chip'
+import { PhoneCamare } from '../../components/icons/phone-camare'
 
 The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
 
@@ -17,12 +18,26 @@ The Avatar component is used to represent a user, and displays the profile pictu
 ### Size
 
 <div class='mb-8 mt-4 p-6 flex flex-row gap-4 justify-center items-center rounded-[0.5rem] border border-neutral-700/50 bg-neutral-700/5'>
-  <Avatar client:load src='https://i.pravatar.cc/150?u=a042581f4e29026024d' />
-  <Avatar client:load src='https://i.pravaar.cc/150?u=a04258a2462d826712d' name='lucas' showFallback={true} />
-  <Avatar client:load src='https://i.pravatar.cc/150?u=a042581f4e29026704d' />
+  <Avatar client:load src='https://example.link/failed' name='Ramiro' showFallback />
+  <Avatar client:load src='https://example.link/failed' name='Ramiro' showFallback={true} icon={<PhoneCamare />} />
+  <Avatar client:load src='https://example.link/failed' />
   <Avatar client:load src='https://i.pravatar.cc/150?u=a04258114e29026302d' />
   <Avatar client:load src='https://i.pravatar.cc/150?u=a04258114e29026708c' />
 </div>
+
+```ts
+export const ExampleComponent = () => {
+  return (
+    <section>
+      <Avatar src='https://example.link/failed' name='Ramiro' showFallback />
+      <Avatar src='https://example.link/failed' name='Ramiro' showFallback icon={<PhoneCamare />} />
+      <Avatar src='https://example.link/failed' />
+      <Avatar src='https://i.pravatar.cc/150?u=a04258114e29026302d' />
+      <Avatar src='https://i.pravatar.cc/150?u=a04258114e29026708c' />
+    </section>
+  )
+}
+```
 
 ### Disabled
 

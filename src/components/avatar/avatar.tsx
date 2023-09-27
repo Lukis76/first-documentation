@@ -1,5 +1,6 @@
 import { useEffect, useState, type FC, type ReactNode } from 'react'
 import { cn } from '../../lib/utils'
+import { PhoneCamare } from '../icons/phone-camare'
 
 type Radius = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
@@ -15,7 +16,7 @@ interface AvatarProps {
   size?: Size
   defaultSrc?: string
   name?: string
-  icon?: ReactNode
+  icon?: ReactNode | JSX.Element
   fallback?: ReactNode
   isBordered?: boolean
   isDisabled?: boolean
@@ -49,7 +50,6 @@ export const Avatar: FC<AvatarProps> = ({
   showFallback = false,
   classNames,
 }): JSX.Element => {
-  const [imgFailed, setImgFailed] = useState<boolean>(false)
   const [img, setImg] = useState<string | undefined>(undefined)
 
   const avatarClassName: Settings = {
@@ -99,6 +99,7 @@ export const Avatar: FC<AvatarProps> = ({
     }
   }, [src])
 
+  const Icon = icon 
   return (
     <div
       role='img'
@@ -122,14 +123,16 @@ export const Avatar: FC<AvatarProps> = ({
         />
       ) : (
         showFallback && (
-          <span aria-label={name} role='img' className={cn(avatarClassName.fallback)}>
-            {!icon &&
+          <span aria-label={name} role='img' className={cn(avatarClassName.fallback)} >
+            {!icon ?
               typeof name === 'string' &&
               (name.split(' ')?.length > 1
                 ? name?.split(' ')[0]?.charAt(0) + name?.split(' ')[1]?.charAt(0)
                 : name?.charAt(0)
-              )?.toLocaleUpperCase()}
-            {icon}
+                )?.toLocaleUpperCase()
+                :
+                <PhoneCamare />
+            }
           </span>
         )
       )}
